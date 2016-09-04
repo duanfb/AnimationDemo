@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+
+import com.neo.dan.view.SampleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn12).setOnClickListener(this);
         findViewById(R.id.btn13).setOnClickListener(this);
 
+
+        findViewById(R.id.btn21).setOnClickListener(this);
+
     }
 
     @Override
@@ -61,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 initAnimators();
             }
-        },500);
+        }, 500);
     }
 
     private void initAnimators() {
@@ -84,8 +91,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private boolean reverse = false;
+
     @Override
     public void onClick(View view) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+
+
         anim1(view);
         switch (view.getId()) {
             case R.id.btn11: //2种随机组合
@@ -96,6 +109,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn13: //4种随机组合
                 anim13(view);
+                break;
+            case R.id.btn21: //吸入动画
+                //中心点
+                int x = location[0] - view.getMeasuredWidth();
+                int y = location[1] - view.getMeasuredHeight();
+
+                ObjectAnimator animator1 = animatorList.get(0);
+                ObjectAnimator animator2 = animatorList.get(0);
+                ObjectAnimator animator3 = animatorList.get(0);
+
                 break;
         }
     }
